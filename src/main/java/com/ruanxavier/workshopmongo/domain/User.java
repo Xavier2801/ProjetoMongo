@@ -1,11 +1,18 @@
 package com.ruanxavier.workshopmongo.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Document(collection="user")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @Field("_id")
     private String id;
     private String name;
     private String email;
