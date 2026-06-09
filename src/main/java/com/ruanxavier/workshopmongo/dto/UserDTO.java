@@ -2,10 +2,14 @@ package com.ruanxavier.workshopmongo.dto;
 
 import com.ruanxavier.workshopmongo.domain.User;
 
+import java.io.Serializable;
 
-    // Implementando um DTO(data transfer object) para carregar dados de entidades de maneira simples
 
-public class UserDTO {
+// Implementando um DTO(data transfer object) para carregar dados de entidades de maneira simples
+
+public class UserDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
+
 
     private String id;
     private String name;
