@@ -2,6 +2,12 @@
 
 API RESTful desenvolvida com **Java + Spring Boot + MongoDB**, implementando um sistema de usuários e posts com operações completas de CRUD e consultas avançadas.
 
+![Java](https://img.shields.io/badge/Java-17-orange?style=flat&logo=java)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.5-brightgreen?style=flat&logo=springboot)
+![MongoDB](https://img.shields.io/badge/MongoDB-6.0-green?style=flat&logo=mongodb)
+![Coverage](https://img.shields.io/badge/Coverage-92%25-brightgreen?style=flat)
+![Tests](https://img.shields.io/badge/Tests-39%20passing-brightgreen?style=flat)
+
 ---
 
 ## 🚀 Tecnologias Utilizadas
@@ -11,36 +17,52 @@ API RESTful desenvolvida com **Java + Spring Boot + MongoDB**, implementando um 
 - **Spring Data MongoDB**
 - **MongoDB**
 - **Maven**
+- **JUnit 5**
+- **Mockito**
+- **JaCoCo** (cobertura de testes)
 
 ---
 
 ## 📁 Estrutura do Projeto
 
 ```
-src/main/java/com/ruanxavier/workshopmongo/
-├── config/
-│   └── Instantiation.java         # Carga inicial de dados no banco
-├── controller/
-│   ├── UserController.java        # Endpoints de usuários
-│   ├── PostController.java        # Endpoints de posts
-│   └── exception/
-│       ├── ControllerExceptionHandler.java
-│       └── StandardError.java
-├── domain/
-│   ├── User.java                  # Entidade usuário
-│   └── Post.java                  # Entidade post
-├── dto/
-│   ├── UserDTO.java               # DTO de usuário
-│   └── AuthorDTO.java             # DTO de autor
-├── repository/
-│   ├── UserRepository.java
-│   └── PostRepository.java
-└── services/
-    ├── UserService.java
-    ├── PostService.java
-    ├── URLService.java
-    └── exception/
-        └── ObjectNotFoundException.java
+src/
+├── main/java/com/ruanxavier/workshopmongo/
+│   ├── config/
+│   │   └── Instantiation.java            # Carga inicial de dados no banco
+│   ├── controller/
+│   │   ├── UserController.java           # Endpoints de usuários
+│   │   ├── PostController.java           # Endpoints de posts
+│   │   └── exception/
+│   │       ├── ControllerExceptionHandler.java
+│   │       └── StandardError.java
+│   ├── controller/util/
+│   │   └── URL.java                      # Utilitário para encode de parâmetros
+│   ├── domain/
+│   │   ├── User.java                     # Entidade usuário
+│   │   └── Post.java                     # Entidade post
+│   ├── dto/
+│   │   ├── UserDTO.java                  # DTO de usuário
+│   │   ├── AuthorDTO.java                # DTO de autor
+│   │   └── CommentDTO.java               # DTO de comentário
+│   ├── repository/
+│   │   ├── UserRepository.java
+│   │   └── PostRepository.java
+│   └── services/
+│       ├── UserService.java
+│       ├── PostService.java
+│       └── exception/
+│           └── ObjectNotFoundException.java
+└── test/java/com/ruanxavier/workshopmongo/
+    ├── controller/
+    │   ├── UserControllerTest.java
+    │   └── PostControllerTest.java
+    ├── domain/
+    │   ├── UserTest.java
+    │   └── PostTest.java
+    └── services/
+        ├── UserServiceTest.java
+        └── PostServiceTest.java
 ```
 
 ---
@@ -134,7 +156,7 @@ spring.data.mongodb.uri=mongodb://localhost:27017/workshop_mongo
 Parâmetros de query:
 
 | Parâmetro | Tipo | Descrição | Exemplo |
-|-----------|------|-----------|---------|
+|-----------|------|-----------|---------| 
 | `text` | String | Texto a buscar no título, corpo ou comentários | `viagem` |
 | `minDate` | String (yyyy-MM-dd) | Data mínima | `2018-01-01` |
 | `maxDate` | String (yyyy-MM-dd) | Data máxima | `2018-12-31` |
@@ -172,6 +194,34 @@ GET http://localhost:8080/posts/fullsearch?text=viagem&minDate=2018-01-01&maxDat
     "comments": []
 }
 ```
+
+---
+
+## 🧪 Testes
+
+O projeto possui **39 testes** com **92% de cobertura** gerada pelo JaCoCo.
+
+### Cobertura por camada
+
+| Camada | Cobertura |
+|--------|-----------|
+| Services | 100% ✅ |
+| Controllers | 100% ✅ |
+| Domain | 100% ✅ |
+| Config | 100% ✅ |
+| Services Exception | 100% ✅ |
+
+### Executar os testes
+```bash
+./mvnw test
+```
+
+### Gerar relatório de cobertura
+```bash
+./mvnw test jacoco:report
+```
+
+O relatório será gerado em `target/site/jacoco/index.html`.
 
 ---
 
